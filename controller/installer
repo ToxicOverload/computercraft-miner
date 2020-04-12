@@ -1,0 +1,12 @@
+local function request(url, path)
+  local file = fs.open(path, "w")
+  file.write(http.get(url).readAll())
+  file.close()
+end
+
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/controller/save", "/save")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/controller/startup", "/startup")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/controller/wirelessRobotController.lua", "/wirelessRobotController.lua")
+
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/controller/data/robot_list", "/data/robot_list")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/controller/data/settings", "/data/settings")
