@@ -345,7 +345,6 @@ function return_tick()
   return false
 end
 
---NEEDS DEBUGGING
 function dropoff()
   local coal_slot
   for i = 1,16 do
