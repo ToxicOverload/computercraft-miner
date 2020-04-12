@@ -1,0 +1,26 @@
+#Extra length of the first strip
+start_dist:10<<NUM
+
+#Distance to go before turning around
+strip_length:10<<NUM
+
+#Number of blocks to leave between strips
+strip_width:2<<NUM
+
+#Initial movement heading for first strip
+strip_direction:3<<NUM
+
+#The direction to turn. -1 is left, 1 is right
+turn_direction:1<<NUM
+
+#The coordinates of where the robot should be when dropping off materials (assumes chest below it) and when starting
+dropoff_location:-173,11,226<<VECTOR
+
+#The maximum distance (as the crow flies) that the bot can be from the dropoff location, calculated based only on x and z
+max_dist:100<<NUM
+
+#Modem frequency to recieve messages
+message_frequency:101<<NUM
+
+#Time to wait after each tick for events (messages, etc.)
+tick_wait:0.1<<NUM

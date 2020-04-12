@@ -1,0 +1,30 @@
+#Standard position variables (heading 0-3 is north-west)
+heading:0<<NUM
+coords:-184,11,223<<VECTOR
+
+#See journal for details
+mode:0<<NUM
+
+#Is the robot active?
+active:true<<BOOL
+
+#The last point on the strip that the robot created
+last_strip_point:-184,11,223<<VECTOR
+
+#The completed length of the strip in progress
+strip_dist:0<<NUM
+
+#The total length of the strip section
+total_strip_dist:3<<NUM
+
+#The direction of the strip in progress
+strip_heading:0<<NUM
+
+#The next location in the vein that the robot will mine
+next_ore_location:-183,14,226<<VECTOR
+
+return_path:0,0,0<<VECTOR_LIST
+
+last_mode:0<<NUM
+
+pause_after_return:false<<BOOL
