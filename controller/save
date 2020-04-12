@@ -1,0 +1,69 @@
+function read_list(path, isnum)
+  local file = io.open(path, "r")
+
+  local contents = {}
+  for line in file:lines() do
+    if not (line:len() == 0 or line:sub(1, 1) == "#") then
+      if isnum then
+        table.insert(contents, tonumber(line))
+      else
+        table.insert(contents, line)
+      end
+    end
+  end
+
+  file:close()
+
+  return contents
+end
+
+function read_standard_file(path)
+  local file = io.open(path, "r")
+
+  data_tmp = {}
+
+  for line in file:lines() do
+    (function()
+    if line:len() == 0 or line:sub(1, 1) == "#" then
+      return
+    end
+
+    local key, value_raw, type = read_standard_line(line)
+
+    if type == "VECTOR" then
+      data_tmp[key] = vector_from_string(value_raw)
+    elseif type == "NUM" then
+      data_tmp[key] = tonumber(value_raw)
+    elseif type == "BOOL" then
+      data_tmp[key] = value_raw == "true"
+    elseif type == "VECTOR_LIST" then
+      data_tmp[key] = vector_list_from_string(value_raw)
+    else
+      print("ERROR: Unknown datatype " .. type)
+    end
+    end)()
+  end
+
+  file:close()
+
+  return data_tmp
+end
+
+function read_standard_line(line)
+  local key, value_raw, type
+  for w in line:gmatch("([^:]+)") do
+    if not key then
+      key = w
+    elseif not value_raw then
+      for p in w:gmatch("([^<<]+)") do
+        if not value_raw then
+          value_raw = p
+        elseif not type then
+          type = p
+        end
+      end
+    end
+  end
+  
+  return key, value_raw, type
+end

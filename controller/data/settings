@@ -1,0 +1,5 @@
+#Time to wait after sending each batch of messages
+send_wait:0.11<<NUM
+
+#Time to wait for receiving messages
+receive_wait:0.2<<NUM
