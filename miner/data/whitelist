@@ -1,0 +1,8 @@
+#Blocks that can be mined (other than ores)
+minecraft:stone
+minecraft:dirt
+minecraft:grass
+minecraft:gravel
+minecraft:sand
+minecraft:obsidian
+minecraft:cobblestone
