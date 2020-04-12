@@ -1,6 +1,9 @@
-#Standard position variables (heading 0-3 is north-west)
+###############EDIT THESE###############
+###########0-3 is North-West############
 heading:0<<NUM
-coords:-184,11,223<<VECTOR
+##################x,y,z#################
+coords:0,0,0<<VECTOR
+########################################
 
 #See journal for details
 mode:0<<NUM
