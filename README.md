@@ -8,6 +8,7 @@ A robot that mines in computercraft, as well as a wireless controller for it.
 1. Set up a 3*2 (3 wide, 2 tall) array of advanced monitors.
 1. Run the following command: `pastebin run UzQh6UMQ`
 1. Restart the computer
+1. If there are multiple robots or your robot has a different channel than the default, make sure the list is updated accordingly
 
 ### For the robot:
 1. Place a robot (either type) at the desired dropoff location (there should be a chest beneath it)
@@ -16,6 +17,7 @@ A robot that mines in computercraft, as well as a wireless controller for it.
 1. Ensure that the values in `data/settings` and `data/data` are correct. This includes:
     1. Changing `coords` and `heading` in `data/data`
     1. Changing the settings in `data/settings` to the desired settings
+    1. Changing `message_frequency` in `data/settings` if this is not the only robot or if channel 101 is being used for something else, change the 
 1. Restart the robot
 
 ## Notes
