@@ -1,0 +1,21 @@
+local function request(url, path)
+  local file = fs.open(path, "w")
+  if url then
+    file.write(http.get(url).readAll())
+  end
+  file.close()
+end
+
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/startup", "/startup")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/mine.lua", "/mine.lua")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/save", "/save")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/pathfinding", "/pathfinding")
+
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/data/data", "/data/data")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/data/ores", "/data/ores")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/data/settings", "/data/settings")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/data/walkable", "/data/walkable")
+request("https://raw.githubusercontent.com/ToxicOverload/computercraft-miner/master/miner/data/whitelist", "/data/whitelist")
+
+request(nil, "/data/current_vein")
+request(nil, "/data/map")
