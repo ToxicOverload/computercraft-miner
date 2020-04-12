@@ -1,5 +1,3 @@
-os.loadAPI("/debug")
-
 os.loadAPI("/save")
 os.loadAPI("/pathfinding")
 
