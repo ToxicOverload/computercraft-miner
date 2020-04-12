@@ -1,0 +1,108 @@
+local function contains_vector_val(table, val)
+  for _,v in pairs(table) do
+    if v.x == val.x and v.y == val.y and v.z == val.z then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function contains_val(table, val)
+  for _,v in pairs(table) do
+    if v == val then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function map_exists(m, coords)
+  if m[coords.x] and m[coords.x][coords.y] and m[coords.x][coords.y][coords.z] then
+    return true
+  else
+    return false
+  end
+end
+
+function neighbors(coords)
+  local list = {}
+  for _,n in ipairs({vector.new(1, 0, 0), vector.new(0, 1, 0), vector.new(0, 0, 1), vector.new(-1, 0, 0), vector.new(0, -1, 0), vector.new(0, 0, -1)}) do
+    table.insert(list, n + coords)
+  end
+
+  return list
+end
+
+function is_walkable(coords, map_obj, walkable)
+  return map_exists(map_obj, coords) and contains_val(walkable, map_obj[coords.x][coords.y][coords.z])
+end
+
+function path(from, to, map_obj, walkable)
+  local weights = {
+    [to.x] = {
+      [to.y] = {
+        [to.z] = 0
+      }
+    }
+  }
+
+  print("Pathfinding...")
+
+  local stack = {to}
+  local stack_index = 1
+  local is_found = false
+
+  while not is_found do
+    if stack_index > #stack then
+      return false
+    end
+
+    print("Looking at node #" .. stack_index)
+
+    --This will yield properly, too avoid "too long without yield" errors
+    os.queueEvent("fakeEvent");
+    os.pullEvent();
+
+    local node = stack[stack_index]
+
+    for _,n in pairs(neighbors(node)) do
+      if (not contains_vector_val(stack, n)) and is_walkable(n, map_obj, walkable) then
+        table.insert(stack, n)
+        
+        if not weights[n.x] then
+          weights[n.x] = {}
+        end
+        if not weights[n.x][n.y] then
+          weights[n.x][n.y] = {}
+        end
+        weights[n.x][n.y][n.z] = weights[node.x][node.y][node.z] + 1
+
+        if n.x == from.x and n.y == from.y and n.z == from.z then
+          is_found = true
+          break
+        end
+      end
+    end
+
+    stack_index = stack_index + 1
+  end
+
+  local path_table = {}
+  local pos = from
+
+  while not (pos.x == to.x and pos.y == to.y and pos.z == to.z) do
+    local lowest = pos
+    for _,n in pairs(neighbors(pos)) do
+      if map_exists(weights, n) and weights[n.x][n.y][n.z] < weights[lowest.x][lowest.y][lowest.z] then
+        lowest = n
+      end
+    end
+
+    pos = lowest
+    table.insert(path_table, pos)
+  end
+
+  return path_table
+end

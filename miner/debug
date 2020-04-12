@@ -1,0 +1,28 @@
+function clear()
+  local file = io.open("/data/debug.log", "w")
+
+  file:close()
+end
+
+function log(msg)
+  local file = io.open("/data/debug.log", "r")
+
+  local lines = {}
+  for line in file:lines() do
+    table.insert(lines, line)
+  end
+
+  file:close()
+
+  file = io.open("/data/debug.log", "w")
+
+  for _,v in ipairs(lines) do
+    file:write(v)
+    file:write("\n")
+  end
+  file:write(msg)
+
+  file:close()
+end
+
+clear()
